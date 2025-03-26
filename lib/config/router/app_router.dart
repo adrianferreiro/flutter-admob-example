@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:test_admob/home_screen.dart';
 import 'package:test_admob/banner/banner_example.dart';
 import 'package:test_admob/interstitial/interstitial_example.dart';
+import 'package:test_admob/rewarded/rewarded_example.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -23,6 +24,13 @@ final appRouter = GoRouter(
           name: InterstitialExample.name,
           builder: (context, state) {
             return InterstitialExample();
+          },
+        ),
+        GoRoute(
+          path: RewardedExample.path,
+          name: RewardedExample.name,
+          builder: (context, state) {
+            return RewardedExample();
           },
         ),
       ],
