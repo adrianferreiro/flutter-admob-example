@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test_admob/banner/banner_example.dart';
+import 'package:test_admob/core/widgets/background_widget.dart';
 import 'package:test_admob/interstitial/interstitial_example.dart';
 import 'package:test_admob/rewarded/rewarded_example.dart';
 
@@ -30,52 +31,59 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SafeArea(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            spacing: 30,
-            children: [
-              Flexible(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 5),
-                  padding: const EdgeInsets.all(15),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: colors.secondary,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(5),
-                      bottomRight: Radius.circular(5),
+          child: BackgroundImage(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              spacing: 30,
+              children: [
+                Flexible(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    padding: const EdgeInsets.all(15),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: colors.secondary,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(5),
+                        bottomRight: Radius.circular(5),
+                      ),
                     ),
-                  ),
-                  child: Text(
-                    'Monetización',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: colors.inversePrimary,
+                    child: Text(
+                      'Monetización',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: colors.inversePrimary,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              FilledButton(
-                onPressed: () {
-                  context.go('${HomeScreen.path}/${BannerExample.path}');
-                },
-                child: Text('Banner'),
-              ),
-              FilledButton(
-                onPressed: () {
-                  context.go('${HomeScreen.path}/${InterstitialExample.path}');
-                },
-                child: Text('Interstitial'),
-              ),
-              FilledButton(
-                onPressed: () {
-                  context.go('${HomeScreen.path}/${RewardedExample.path}');
-                },
-                child: Text('Video rewarded'),
-              ),
-            ],
+                FilledButton.icon(
+                  icon: Icon(Icons.ad_units),
+                  onPressed: () {
+                    context.go('${HomeScreen.path}/${BannerExample.path}');
+                  },
+                  label: Text('Banner'),
+                ),
+                FilledButton.icon(
+                  icon: Icon(Icons.movie),
+                  onPressed: () {
+                    context.go(
+                      '${HomeScreen.path}/${InterstitialExample.path}',
+                    );
+                  },
+                  label: Text('Interstitial'),
+                ),
+                FilledButton.icon(
+                  icon: Icon(Icons.monetization_on),
+                  onPressed: () {
+                    context.go('${HomeScreen.path}/${RewardedExample.path}');
+                  },
+                  label: Text('Video rewarded'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
