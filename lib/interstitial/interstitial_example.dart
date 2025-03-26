@@ -85,46 +85,43 @@ class InterstitialExampleState extends State<InterstitialExample> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Interstitial Example',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Interstitial Example'),
-          actions: _appBarActions(),
-        ),
-        body: Stack(
-          children: [
-            const Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.all(15),
-                child: Text(
-                  'The Impossible Game',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Interstitial Example'),
+        actions: _appBarActions(),
+      ),
+      body: Stack(
+        children: [
+          const Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: EdgeInsets.all(15),
+              child: Text(
+                'The Impossible Game',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('${_counter.toString()} seconds left!'),
-                  Visibility(
-                    visible: _counter == 0,
-                    child: TextButton(
-                      onPressed: () {
-                        _startNewGame();
-                        _loadAd();
-                      },
-                      child: const Text('Play Again'),
-                    ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('${_counter.toString()} seconds left!'),
+                Visibility(
+                  visible: _counter == 0,
+                  child: TextButton(
+                    onPressed: () {
+                      _startNewGame();
+                      _loadAd();
+                    },
+                    child: const Text('Play Again'),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

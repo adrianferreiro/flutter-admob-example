@@ -96,97 +96,90 @@ class RewardedExampleState extends State<RewardedExample> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Rewarded Example',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Rewarded Example'),
-          actions: _appBarActions(),
-        ),
-        body: Stack(
-          children: [
-            const Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.all(15),
-                child: Text(
-                  'The Impossible Game',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Rewarded Example'),
+        actions: _appBarActions(),
+      ),
+      body: Stack(
+        children: [
+          const Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: EdgeInsets.all(15),
+              child: Text(
+                'The Impossible Game',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    _countdownTimer.isComplete
-                        ? 'Game over!'
-                        : '${_countdownTimer.timeLeft} seconds left!',
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  _countdownTimer.isComplete
+                      ? 'Game over!'
+                      : '${_countdownTimer.timeLeft} seconds left!',
+                ),
+                Visibility(
+                  visible: _countdownTimer.isComplete,
+                  child: TextButton(
+                    onPressed: () {
+                      _startNewGame();
+                      _loadAd();
+                    },
+                    child: const Text('Play Again'),
                   ),
-                  Visibility(
-                    visible: _countdownTimer.isComplete,
-                    child: TextButton(
-                      onPressed: () {
-                        _startNewGame();
-                        _loadAd();
-                      },
-                      child: const Text('Play Again'),
-                    ),
-                  ),
-                  Visibility(
-                    visible: _showWatchVideoButton,
-                    child: TextButton(
-                      onPressed: () {
-                        setState(() => _showWatchVideoButton = false);
+                ),
+                Visibility(
+                  visible: _showWatchVideoButton,
+                  child: TextButton(
+                    onPressed: () {
+                      setState(() => _showWatchVideoButton = false);
 
-                        _rewardedAd?.show(
-                          onUserEarnedReward: (
-                            AdWithoutView ad,
-                            RewardItem rewardItem,
-                          ) {
-                            // ignore: avoid_print
-                            print('Reward amount: ${rewardItem.amount}');
-                            setState(() => _coins += rewardItem.amount.toInt());
-                          },
-                        );
-                      },
-                      child: const Text('Watch video for additional 10 coins'),
-                    ),
+                      _rewardedAd?.show(
+                        onUserEarnedReward: (
+                          AdWithoutView ad,
+                          RewardItem rewardItem,
+                        ) {
+                          // ignore: avoid_print
+                          print('Reward amount: ${rewardItem.amount}');
+                          setState(() => _coins += rewardItem.amount.toInt());
+                        },
+                      );
+                    },
+                    child: const Text('Watch video for additional 10 coins'),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Colors.black87,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.monetization_on,
-                        color: Colors.amber,
-                        size: 50,
-                      ),
-                      Text(
-                        'Coins: $_coins',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ],
-                  ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Colors.black87,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.monetization_on, color: Colors.amber, size: 50),
+                    Text(
+                      'Coins: $_coins',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
