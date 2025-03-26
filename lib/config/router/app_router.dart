@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:test_admob/banner/banner_example.dart';
 import 'package:test_admob/home_screen.dart';
 
 final appRouter = GoRouter(
@@ -9,7 +10,14 @@ final appRouter = GoRouter(
       name: HomeScreen.name,
       builder: (context, state) => const HomeScreen(),
       routes: [
-         
-        ]),
+        GoRoute(
+          path: BannerExample.path,
+          name: BannerExample.name,
+          builder: (context, state) {
+            return BannerExample();
+          },
+        ),
+      ],
+    ),
   ],
 );

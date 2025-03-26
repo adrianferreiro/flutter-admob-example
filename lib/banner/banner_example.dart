@@ -7,6 +7,8 @@ import 'package:test_admob/banner/widgets.dart';
 /// An example app that loads a banner ad.
 
 class BannerExample extends StatefulWidget {
+  static const name = 'banner';
+  static const path = '/banner';
   const BannerExample({super.key});
 
   @override
