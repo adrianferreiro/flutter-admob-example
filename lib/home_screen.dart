@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test_admob/banner/banner_example.dart';
+import 'package:test_admob/interstitial/interstitial_example.dart';
 
 class HomeScreen extends StatefulWidget {
   static const name = 'home-screen';
@@ -36,7 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: Text('Banner'),
               ),
-              FilledButton(onPressed: () {}, child: Text('Interstitial')),
+              FilledButton(
+                onPressed: () {
+                  context.go('${HomeScreen.path}/${InterstitialExample.path}');
+                },
+                child: Text('Interstitial'),
+              ),
               FilledButton(onPressed: () {}, child: Text('Video rewarded')),
             ],
           ),
